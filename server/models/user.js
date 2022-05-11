@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 const config = require("config");
 const jwt = require("jsonwebtoken");
+const {itemSchema} = require("../models/items")
 
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true, minlength: 1, maxLength: 24 },
@@ -15,6 +16,7 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
   },
   password: { type: String, required: true, maxLength: 1024, minLength: 5 },
+  items: [{ type: itemSchema }],
   image: { type: String, default: "" },
 });
 
