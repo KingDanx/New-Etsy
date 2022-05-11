@@ -90,4 +90,25 @@ router.get("/:userId", auth, async (req, res) => {
   }
 });
 
+//Updates a user's info
+router.put("/:userId/", auth, async (req, res) => {
+  try {
+    const { error } = validateUser(req.body);
+    if (error) return res.status(400).send(error);
+
+    const user = await User.findById(req.params.userId);
+    if (!user)
+      return res
+        .status(400)
+        .send(`The user with id: "${req.params.userId}" does not exist.`);
+
+      user.email = req.body.email;
+
+    await user.save();
+    return res.send(user);
+  } catch (ex) {
+    return res.status(500).send(`Internal Server Error: ${ex}`);
+  }
+});
+
 module.exports = router;
