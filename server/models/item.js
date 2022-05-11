@@ -8,4 +8,8 @@ const itemSchema = new mongoose.Schema({
     price: { type: Number },
 })
 
+const Item = mongoose.model("Item", itemSchema);
+
+
+exports.Item = Item;
 exports.itemSchema = itemSchema

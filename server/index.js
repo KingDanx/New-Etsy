@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./startup/db');
 const users = require('./routes/users');
-// const tasks = require('./routes/tasks');
+const items = require('./routes/items');
 const fs = require('fs');
 const path = require('path');
 
@@ -14,6 +14,7 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use('/api/users', users);
+app.use('/api/items', items);
 
 app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 app.use((error, req, res, next) => {
