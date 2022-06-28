@@ -1,4 +1,4 @@
-const { Item } = require("../models/item");
+const { Item, validateItem } = require("../models/item");
 const express = require("express");
 const auth = require("../middleware/auth");
 const router = express.Router();
