@@ -53,4 +53,27 @@ router.get("/:itemId", async (req, res) => {
     }
   });
 
+  //Updates an item's info
+router.put("/:itemId/", async (req, res) => {
+    try {
+      const { error } = validateItem(req.body);
+      if (error) return res.status(400).send(error);
+  
+      const item = await Item.findById(req.params.itemId);
+      if (!item)
+        return res
+          .status(400)
+          .send(`The item with id: "${req.params.itemId}" does not exist.`);
+  
+        item.title = req.body.title;
+        item.price = req.body.price;
+        item.description = req.body.description;
+  
+      await item.save();
+      return res.send(item);
+    } catch (ex) {
+      return res.status(500).send(`Internal Server Error: ${ex}`);
+    }
+  });
+
 module.exports = router;
