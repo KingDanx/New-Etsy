@@ -29,4 +29,14 @@ router.post("/registerItem", async (req, res) => {
     }
   });
 
+  //Get all items
+router.get("/", async (req, res) => {
+    try {
+      const items = await Item.find();
+      return res.send(items);
+    } catch (ex) {
+      return res.status(500).send(`Internal Server Error: ${ex}`);
+    }
+  });
+
 module.exports = router;
