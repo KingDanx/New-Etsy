@@ -13,7 +13,7 @@ const validateItem = (item) => {
     const schema = Joi.object({
       title: Joi.string().min(1).max(24).required(),
       price: Joi.number().min(1).max(24).required(),
-      description: Joi.string().min(5).max(255).required().email(),
+      description: Joi.string().min(5).max(255).required(),
     });
     return schema.validate(item);
   };
