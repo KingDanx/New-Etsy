@@ -39,4 +39,18 @@ router.get("/", async (req, res) => {
     }
   });
 
+  //Get a single item
+router.get("/:itemId", async (req, res) => {
+    try {
+      const item = await Item.findById(req.params.itemId);
+      if (!item)
+        return res
+          .status(400)
+          .send(`Item with id ${req.params.itemId} does not exist!`);
+      return res.send(item);
+    } catch (ex) {
+      return res.status(500).send(`Internal Server Error: ${ex}`);
+    }
+  });
+
 module.exports = router;
